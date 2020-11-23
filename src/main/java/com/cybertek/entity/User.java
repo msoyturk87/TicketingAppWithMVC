@@ -19,7 +19,7 @@ public class User extends BaseEntity {
     private Role role;
     private Gender gender;
 
-    // to use super contructor
+    // to use super constructor with parameter it refers @AllArgsConstructor
     public User(Long id, LocalDateTime insertDateTime, Long insertUserId, LocalDateTime lastUpdateDateTime, Long lastUpdateUserId, String firstName, String lastName, String userName, String passWord, boolean enabled, String phone, Role role, Gender gender) {
         super(id, insertDateTime, insertUserId, lastUpdateDateTime, lastUpdateUserId);
         this.firstName = firstName;
