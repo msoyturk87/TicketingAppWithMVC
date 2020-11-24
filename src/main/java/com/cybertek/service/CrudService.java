@@ -1,7 +1,5 @@
 package com.cybertek.service;
 
-import com.cybertek.dto.RoleDTO;
-
 import java.util.List;
 
 public interface CrudService<T,ID>{

@@ -100,43 +100,42 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <label>Gender</label><br>
-                                                    <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" checked=""th:field="*{gender}" th:value="Male"  class="custom-control-input"><span class="custom-control-label">Male</span>
-                                                    </label>
-                                                    <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:field="*{gender}" th:value="Female" class="custom-control-input"><span class="custom-control-label">Female</span>
-                                                    </label>
+                                              <div class="col-sm-6 col-md-6">
+                                                  <div class="form-group">
+                                                      <label>Gender</label><br>
+                                                      <label class="custom-control custom-radio custom-control-inline">
+                                                          <input type="radio" name="radio-inline" checked="" th:field="*{gender}" th:value="MALE"  class="custom-control-input"><span class="custom-control-label">Male</span>
+                                                      </label>
+                                                      <label class="custom-control custom-radio custom-control-inline">
+                                                          <input type="radio" name="radio-inline" th:field="*{gender}" th:value="FEMALE" class="custom-control-input"><span class="custom-control-label">Female</span>
+                                                      </label>
 
-                                                </div>
-                                            </div>
+                                                  </div>
+                                              </div>
 
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <label>Choose a Role</label>
-                                                    <select name="roleid" id="roleid" th:field="*{role}"   class="custom-select" required="required">
-                                                        <option  th:value="''" th:text="Select"</option>
-                                                        <option  th:each="role :${} th:text="Select"</option>
+                                              <div class="col-sm-6 col-md-6">
+                                                  <div class="form-group">
+                                                      <label>Choose a Role</label>
+                                                      <select name="roleid" id="roleid" th:field="*{role.description}"   class="custom-select" required="required">
+                                                          <option  th:value="''" th:text="Select"</option>
+                                                          <option  th:each="rol : ${roleList}" th:value="${rol}" th:text="${rol.getDescription()}"</option>
 
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                          </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6 col-lg-12">
-                                                <div class="float-right">
-                                                    <button type="submit" class="btn btn-success">Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                          <div class="row">
+                                              <div class="col-sm-6 col-md-6 col-lg-12">
+                                                  <div class="float-right">
+                                                      <button type="submit" class="btn btn-success">Save</button>
+                                                  </div>
+                                              </div>
+                                          </div>
 
-                                    </form>
-                                    <!-- ------------------------FORM END----------------------------- -->
+                                      </form>
+                                      <!-- ------------------------FORM END----------------------------- -->
 
                                 </div>
 
@@ -173,39 +172,21 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>Ozzy</td>
-                                                <td>ozzy@cybertekschool.com</td>
-                                                <td>Male</td>
-                                                <td>2022023333</td>
-                                                <td>Employee</td>
+
+                                            <tr th:each="user : ${userList}" >
+                                                <td th:text="${user.firstName}"></td>
+                                                <td th:text="${user.userName}"></td>
+                                                <td th:text="${user.gender}"></td>
+                                                <td th:text="${user.phone}"></td>
+                                                <td th:text="${user.role.description}"></td>
                                                 <td class="actions">
                                                     <a href=""><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                                                    <a href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
+                                                    <a th:href="@{/user/delete}" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
                                                 </td>
+
                                             </tr>
-                                            <tr>
-                                                <td>Ozzy</td>
-                                                <td>ozzy@cybertekschool.com</td>
-                                                <td>Male</td>
-                                                <td>2022023333</td>
-                                                <td>Employee</td>
-                                                <td class="actions">
-                                                    <a href=""><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                                                    <a href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ozzy</td>
-                                                <td>ozzy@cybertekschool.com</td>
-                                                <td>Male</td>
-                                                <td>2022023333</td>
-                                                <td>Employee</td>
-                                                <td class="actions">
-                                                    <a href=""><button type="button" class="btn btn-warning btn-sm">Update</button></a>
-                                                    <a href="" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
-                                                </td>
-                                            </tr>
+
+
                                             </tbody>
                                         </table>
                                     </div>

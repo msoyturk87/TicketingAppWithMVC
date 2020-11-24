@@ -8,20 +8,21 @@ import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 @Component
 public class DataGenerator implements CommandLineRunner {
-
+    // Inject it via Interface
     RoleService roleService;
     UserService userService;
 
-
+    //Autowired
     public DataGenerator(RoleService roleService, UserService userService) {
         this.roleService = roleService;
         this.userService = userService;
     }
 
     // After spring initiliaze it works directly
+    // CommandLineRunner runs one time before everything
+
     @Override
     public void run(String... args) throws Exception {
 
