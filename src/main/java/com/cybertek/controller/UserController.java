@@ -5,52 +5,85 @@ import com.cybertek.dto.UserDTO;
 import com.cybertek.implementation.RoleServiceImpl;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
 @Controller
 @RequestMapping("/user")
-@Component
 public class UserController {
 
-
+    @Autowired
     RoleService roleService;
+    @Autowired
     UserService userService;
 
-
-    public UserController(RoleService roleService, UserService userService) {
-        this.roleService = roleService;
-        this.userService = userService;
-    }
-
-    @GetMapping({"/create","/add","/initialize"})
+    @GetMapping("/create")
     public String createUser(Model model){
 
-
         model.addAttribute("user",new UserDTO());
-        model.addAttribute("roleList",roleService.findAll());
-        //DataGenerator need for Role so we should create service for this
+        model.addAttribute("roles",roleService.findAll());
+        model.addAttribute("users",userService.findAll());
+
         return "/user/create";
     }
 
     @PostMapping("/create")
-    public String submitForm(@ModelAttribute("user") UserDTO userDTO,Model model){
+    public String insertUser(UserDTO user,Model model){
 
-        userService.save(userDTO);
-        model.addAttribute("userList",userService.findAll());
+        userService.save(user);
 
+        model.addAttribute("user",new UserDTO());
+        model.addAttribute("roles",roleService.findAll());
+        model.addAttribute("users",userService.findAll());
 
-        return "user/create";
+        return "/user/create";
+
     }
+
+    @GetMapping("/update/{username}")
+    public String editUser(@PathVariable("username") String username,Model model){
+
+        model.addAttribute("user",userService.findById(username));
+        model.addAttribute("users",userService.findAll());
+        model.addAttribute("roles",roleService.findAll());
+
+        return "/user/update";
+
+    }
+
+    @PostMapping("/update/{username}")
+    public String updateUser(@PathVariable("username") String username,Model model){
+
+        model.addAttribute("user",new UserDTO());
+        model.addAttribute("roles",roleService.findAll());
+        model.addAttribute("users",userService.findAll());
+
+        return "/user/create";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

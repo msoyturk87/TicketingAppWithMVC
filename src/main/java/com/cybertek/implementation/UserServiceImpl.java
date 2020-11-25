@@ -5,13 +5,23 @@ import com.cybertek.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class UserServiceImpl extends AbstractMapService<UserDTO, String> implements UserService {
 
+@Service
+public class UserServiceImpl extends AbstractMapService<UserDTO,String> implements UserService {
 
     @Override
     public List<UserDTO> findAll() {
         return super.findAll();
+    }
+
+    @Override
+    public UserDTO save(UserDTO object) {
+        return super.save(object.getUserName(),object);
+    }
+
+    @Override
+    public void update(UserDTO object) {
+        super.update(object.getUserName(),object);
     }
 
     @Override
@@ -20,13 +30,8 @@ public class UserServiceImpl extends AbstractMapService<UserDTO, String> impleme
     }
 
     @Override
-    public void delete(UserDTO user) {
-        super.delete(user);
-    }
-
-    @Override
-    public UserDTO save(UserDTO object) {
-        return super.save(object.getUserName(),object);
+    public void delete(UserDTO object) {
+        super.delete(object);
     }
 
     @Override
