@@ -4,4 +4,6 @@ import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.UserDTO;
 
 public interface ProjectService extends CrudService<ProjectDTO,String> {
+
+   void  complete(ProjectDTO project);
 }

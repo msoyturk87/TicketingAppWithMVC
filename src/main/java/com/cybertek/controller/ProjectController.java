@@ -22,7 +22,7 @@ public class  ProjectController {
     public String createProject(Model model){
         model.addAttribute("project",new ProjectDTO());
         model.addAttribute("projects",projectService.findAll());
-        model.addAttribute("managers",userService.findAll());
+        model.addAttribute("managers",userService.findManagers());
 
 
         return "/project/create";
@@ -42,27 +42,29 @@ public class  ProjectController {
         projectService.deleteById(projectCode);
         return "redirect:/project/create";
     }
+
+
     @GetMapping("/complete/{project}")
     public String completeProject(@PathVariable("project")String projectCode){
-        projectService.findById(projectCode).setStatus(Status.COMPLETE);
+        projectService.complete(projectService.findById(projectCode));
         return "redirect:/project/create";
     }
 
     @GetMapping("/update/{projectCode}")
-    public String updateProject(@PathVariable("projectCode")String projectCode,Model model){
+    public String editProject(@PathVariable("projectCode")String projectCode,Model model){
 
         model.addAttribute("project",projectService.findById(projectCode));
         model.addAttribute("projects",projectService.findAll());
-        model.addAttribute("managers",userService.findAll());
+        model.addAttribute("managers",userService.findManagers());
 
 
-        return "/project/create";
+        return "/project/update";
     }
 
     @PostMapping("/update")
     public String updateProject(@ModelAttribute("project")ProjectDTO project){
 
-        projectService.save(project);
+        projectService.update(project);
 
 
         return "redirect:/project/create";
