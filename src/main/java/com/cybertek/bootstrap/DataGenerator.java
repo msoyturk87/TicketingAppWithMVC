@@ -1,23 +1,31 @@
 package com.cybertek.bootstrap;
 
+import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.RoleDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.enums.Gender;
+import com.cybertek.enums.Status;
 import com.cybertek.implementation.RoleServiceImpl;
+import com.cybertek.service.ProjectService;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+
 @Component
 public class DataGenerator implements CommandLineRunner {
     // Inject it via Interface
     RoleService roleService;
     UserService userService;
+    ProjectService projectService;
 
     //Autowired
-    public DataGenerator(RoleService roleService, UserService userService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
         this.roleService = roleService;
         this.userService = userService;
+        this.projectService = projectService;
     }
 
     // After spring initiliaze it works directly
@@ -53,5 +61,14 @@ public class DataGenerator implements CommandLineRunner {
         userService.save(user4);
         userService.save(user5);
 
+        ProjectDTO project1=new ProjectDTO("Spring MVC","PR001",user1, LocalDate.now(),LocalDate.now().plusDays(25),"Creating controllers", Status.OPEN );
+        ProjectDTO project2=new ProjectDTO("Spring ORM","PR002",user1, LocalDate.now(),LocalDate.now().plusDays(21),"Creating Database ", Status.IN_PROGRESS);
+        ProjectDTO project3=new ProjectDTO("Spring MVC","PR003",user2, LocalDate.now(),LocalDate.now().plusDays(27),"Creating controllers", Status.OPEN );
+        ProjectDTO project4=new ProjectDTO("Spring MVC","PR004",user3, LocalDate.now(),LocalDate.now().plusDays(8),"Finished ", Status.COMPLETE );
+
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
+        projectService.save(project4);
     }
 }
