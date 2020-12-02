@@ -70,4 +70,13 @@ public class  ProjectController {
         return "redirect:/project/create";
     }
 
+    @GetMapping("/manager/complete")
+    public String completeProject(@ModelAttribute("project")ProjectDTO project){
+
+        projectService.update(project);
+
+
+        return "redirect:/project/create";
+    }
+
 }

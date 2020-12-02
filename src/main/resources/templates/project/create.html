@@ -32,12 +32,12 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form class="needs-validation" novalidate th:action="@{/project/create}" method="post" th:object="${project}" >
+                                    <form class="needs-validation" novalidate th:action="@{/project/create}" method="post" th:object="${project}">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="col-form-label">Project Name</label>
-                                                    <input id="projectname" th:field="*{projectName}" type="text" placeholder="project name" class="form-control" required>
+                                                    <input id="projectname" type="text" placeholder="project name" th:field="*{projectName}" class="form-control" required>
                                                     <div class="invalid-feedback">Please enter project name.</div>
                                                 </div>
                                             </div>
@@ -46,7 +46,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="col-form-label">Project Code</label>
-                                                    <input id="projectcode" th:field="*{projectCode}" type="text" placeholder="project code" class="form-control" required>
+                                                    <input id="projectcode" type="text" placeholder="project code" th:field="*{projectCode}" class="form-control" required>
                                                     <div class="invalid-feedback">Please enter project code.</div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project Detail</label>
-                                                    <textarea class="form-control"  th:field="*{projectDetail}" required></textarea>
+                                                    <textarea class="form-control" th:field="*{projectDetail}"required></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,16 +114,16 @@
                         <div class="col-md-12">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    <h2 class="panel-title">Project List</h2>
+                                    <h2 class="panel-title">User List</h2>
                                 </header>
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
-                                            <tr >
-                                                <th scope="col" >Project Code</th>
+                                            <tr>
+                                                <th scope="col">Project Code</th>
                                                 <th scope="col">Project Name</th>
-                                                <th scope="col">Start / End Date</th>
+                                                <th scope="col">Start - End Date</th>
                                                 <th scope="col">Manager</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Action</th>
@@ -133,13 +133,13 @@
                                             <tr th:each="project : ${projects}">
                                                 <td th:text="${project.projectCode}"></td>
                                                 <td th:text="${project.projectName}"></td>
-                                                <td th:text="${#temporals.format(project.startDate,'MM.dd.yyyy')+'-'+ #temporals.format(project.endDate,'MM.dd.yyyy')}"></td>
-                                                <td th:text="${project.assignedManager.firstName+' '+project.assignedManager.lastName}"></td>
-                                                <td th:text="${project.status}" ></td>
+                                                <td th:text="${#temporals.format(project.startDate,'MM.dd.yyyy') + ' - ' + #temporals.format(project.endDate,'MM.dd.yyyy')}"></td>
+                                                <td th:text="${project.assignedManager.firstName + ' ' + project.assignedManager.lastName}"></td>
+                                                <td th:text="${project.status}"></td>
                                                 <td>
-                                                    <a th:href="@{/project/update/{id}(id=${project.projectCode})}"  class="btn btn-warning rounded-0">Update</a>
-                                                    <a th:href="@{/project/delete/{id}(id=${project.projectCode})}" class="btn btn-danger rounded-0">Delete</a>
-                                                    <a th:href="@{/project/complete/{id}(id=${project.projectCode})}"  class="btn btn-info rounded-0">Complete</a>
+                                                    <a th:href="@{/project/update/{id}(id=${project.getProjectCode()})}"class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/project/delete/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
+                                                    <a th:href="@{/project/complete/{id}(id=${project.getProjectCode()})}"class="btn btn-info rounded-0">Complete</a>
                                                 </td>
                                             </tr>
                                             </tbody>
