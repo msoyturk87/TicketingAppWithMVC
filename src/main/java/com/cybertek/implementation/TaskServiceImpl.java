@@ -1,6 +1,7 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.TaskDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.service.TaskService;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,14 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO,Long> implements
     @Override
     public TaskDTO findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public List<TaskDTO> findTaskByManager(UserDTO manager) {
+        return super.findAll()
+                .stream()
+                .filter(task->task.getProject()
+                        .getAssignedManager().equals(manager))
+                .collect(Collectors.toList());
     }
 }
